@@ -5,7 +5,7 @@ https://docs.galxe.com/quest/credential-api/rest-cred/single-config
 
 ## API Configurationss
 
-### Buy any memecoin on Kensei for $20
+### Buy any memecoin on Kensei for $10
 
 #### - Endpoint
 
@@ -102,3 +102,76 @@ function(resp) {
   return 0
 }
 ```
+
+### Buy one of the graduated coin for $10
+
+> **Note:** Adjust minimum buy amount by changing `minAmountUsd=10` in endpoint.
+
+> **Test address:** `0x93f8e7ec7e054b476d7de8e6bb096e56cd575beb`
+
+#### - Endpoint
+
+```
+https://quest.kensei.one/galxe/buy-graduated-token?walletAddress=$address&minAmountUsd=10
+```
+
+#### - Request Type
+
+`GET`
+
+#### - Headers
+
+```
+x-api-key: API_KEY
+```
+
+#### - Response:
+
+```json
+{
+  "error": false,
+  "data": {
+    "items": [
+      {
+        "amount0": "-2808494.840302115550844656",
+        "amount1": "0.026194979995706738",
+        "amountUSD": "100.3595019536839342373886785768318",
+        "id": "0x63e32730c6dad2b2c5554494c1d21e02e3d46270ac3b04ca286d698a6f894bb9#69",
+        "origin": "0x93f8e7ec7e054b476d7de8e6bb096e56cd575beb",
+        "pool": {
+          "id": "0x53804a1b515c04161f96323e0efc42d2705842a6",
+          "token0": {
+            "id": "0xa600a613c967b9edf2b6019ea300abc738f88637",
+            "name": "BUSHIDO",
+            "symbol": "BUSHIDO"
+          },
+          "token1": {
+            "id": "0xee7d8bcfb72bc1880d0cf19822eb0a2e6577ab62",
+            "name": "Vault Bridge ETH",
+            "symbol": "vbETH"
+          }
+        },
+        "recipient": "0xd2b37ade14708bf18904047b1e31f8166d39612b",
+        "sender": "0xd2b37ade14708bf18904047b1e31f8166d39612b",
+        "timestamp": "1761878810",
+        "transaction": {
+          "blockNumber": "15135999",
+          "id": "0x63e32730c6dad2b2c5554494c1d21e02e3d46270ac3b04ca286d698a6f894bb9"
+        }
+      }
+    ]
+  }
+}
+```
+
+#### - Expression
+
+```js
+function(resp) {
+  if (resp.data.items != null && resp.data.items.length > 0) {
+    return 1
+  }
+  return 0
+}
+```
+
